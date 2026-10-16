@@ -6242,6 +6242,18 @@ with pkgs;
     };
   };
 
+  opencascade-occt_8 = opencascade-occt.overrideAttrs (
+    finalAttrs: _: {
+      version = "8.0.1";
+      src = fetchFromGitHub {
+        owner = "Open-Cascade-SAS";
+        repo = "OCCT";
+        tag = "V${builtins.replaceStrings [ "." ] [ "_" ] finalAttrs.version}";
+        hash = "sha256-QgSfrWc6qxbiHBapyGa9+ixRi/dOXqMox8U2f+tCH8o=";
+      };
+    }
+  );
+
   opencv4 = callPackage ../development/libraries/opencv/4.x.nix {
     pythonPackages = python3Packages;
     # TODO: LTO does not work.
